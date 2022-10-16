@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<form method="post">
+    <label for="categoryName">Наименование: </label>
+    <input type="text" id="categoryName" name="categoryName" minlength="1" maxlength="32" required><br><br>
+    <input type="submit" value="Создать"><br>
+</form>
+</body>
+</html>

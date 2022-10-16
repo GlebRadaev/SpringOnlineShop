@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<h1>Информация о товаре</h1>
+<div th:each="prod : ${product}" class="product">
+    <p class="title" th:text="${prod.title}"></p>
+    <p><img th:src="${prod.imageLocation}" height="200"/></p>
+    <p th:text="${prod.quantity != 0} ? ${prod.price} : 'Нет в наличии'"></p>
+    <p>
+    <form method="post" th:action="@{/cart/new/{id}(id=${prod.id})}" th:if="${prod.quantity > 0}">
+        <input type="submit" value="В корзину" class="cart">
+    </form>
+    <input type="button" value="Назад" onclick="history.back()">
+</div>
+<hr>
+<form th:action="@{/comments/new}" method="post">
+    <h4>Хотите оставить отзыв?</h4>
+    <input type="hidden" th:value="${product.id}" name="product" required>
+    Оценка:
+    <label>
+        <input type="number" min="1" max="5" name="rating" required class="rating">
+    </label><br>
+    Комментарий<Br>
+    <label>
+        <textarea maxlength="384" cols="50" rows="4" placeholder="Не более 384 символов" name="comment"
+                  class="comment"></textarea>
+    </label><br><br>
+    <input type="submit" value="Отправить" class="send">
+    <input type="reset" value="Очистить">
+</form>
+<h2>Отзывы:</h2>
+<p th:if="${reviews.size()==0}" class="noreviews">Никто не написал отзыв. Станьте первым</p>
+<div th:each="rev : ${reviews}">
+    <div th:if="${reviews.size()>0}" class="reviews">
+        <div class="author">
+            <p>[[${rev.author.firstname}]] оценил товар на [[${rev.rating}]]</p>
+            <form method="post" th:action="@{/comments/delete/{id}(id=${rev.id})}" sec:authorize="hasAuthority('ADMIN')">
+                <input type="submit" value="Удалить" class="delete">
+            </form>
+        </div>
+        <p th:text="${rev.comment}" class="revtext"></p>
+    </div>
+</div>
+</body>
+</html>

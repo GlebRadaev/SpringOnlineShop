@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container register-container">
+    <div class="row">
+        <div class="col-md-6 register-form-1">
+        <form method="post">
+            <h3>Registration</h3>
+            <label for="email">Эл. почта: </label>
+            <input type="email" id="email" name="email" minlength="1" maxlength="255" placeholder="Email address" required><br><br>
+
+            <label for="firstname">Имя: </label>
+            <input type="text" id="firstname" name="firstname" minlength="1" maxlength="100" placeholder="First name"required><br><br>
+
+            <label for="lastname">Фамилия: </label>
+            <input type="text" id="lastname" name="lastname" minlength="1" maxlength="100" placeholder="Last name" required><br><br>
+
+            <label for="password">Пароль: </label>
+            <input type="password" id="password" name="password"placeholder="Password" required><br><br>
+
+            <input type="submit" value="Регистрация" class="save">
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

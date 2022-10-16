@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<form th:action="@{/category/edit/{id}(id=${categoryForm.id})}" th:object="${categoryForm}" method="post">
+    <label for="name">Наименование: </label>
+    <input type="text" id="name" name="categoryName" th:field="*{categoryName}" minlength="1" maxlength="32" required><br><br>
+
+    <input type="submit" value="Сохранить" class="save">
+</form>
+</body>
+</html>

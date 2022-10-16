@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<h2>Админ-панель</h2>
+<div class="manage">
+    <div class="small">
+        <h3>Управление категориями</h3>
+        <button role="button" type="button" onclick="window.location.href='/category/new'" class="create">Создать
+            категорию
+        </button>
+        <table>
+            <tr>
+                <th>Наименование</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="cat : ${categoryList}">
+                <td th:text="${cat.categoryName}"></td>
+                <td>
+                    <form method="get" th:action="@{/category/edit/{id}(id=${cat.id})}">
+                        <input type="submit" value="Изменить" class="edit">
+                    </form>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/category/delete/{id}(id=${cat.id})}">
+                        <input type="submit" value="Удалить" class="delete">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="small">
+        <h3>Управление пользователями</h3>
+        <button role="button" type="button" onclick="window.location.href='/users/new'" class="create">Создать
+            пользователя
+        </button>
+        <table>
+            <tr>
+                <th>Эл. почта</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Роль</th>
+                <th>Статус</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.firstname}"></td>
+                <td th:text="${user.lastname}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.status}"></td>
+                <td>
+                    <form method="get" th:action="@{/users/edit/{id}(id=${user.id})}">
+                        <input type="submit" value="Изменить" class="edit">
+                    </form>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/users/delete/{id}(id=${user.id})}">
+                        <input type="submit" value="Удалить" class="delete">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div>
+    <h3>Управление товарами</h3>
+    <button role="button" type="button" onclick="window.location.href='/products/new'" class="create">Создать товар
+    </button>
+    <table>
+        <tr>
+            <th>Наименование</th>
+            <th>Изображение</th>
+            <th>Категория</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="prod : ${productList}" class="product">
+            <td><a th:text="${prod.title}" th:href="@{/products/{id}(id=${prod.id})}" class="title"></a></td>
+            <td><img th:src="${prod.imageLocation}" height="200"/></td>
+            <td th:text="${prod.categoryName}"></td>
+            <td th:text="${prod.price}"></td>
+            <td th:text="${prod.quantity}"></td>
+            <td>
+                <form method="get" th:action="@{/products/edit/{id}(id=${prod.id})}">
+                    <input type="submit" value="Изменить" class="edit">
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{/products/delete/{id}(id=${prod.id})}">
+                    <input type="submit" value="Удалить" class="delete">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<br>
+<button role="button" type="button" onclick="window.location.href='index'" class="main">На главную</button>
+</body>
+</html>
